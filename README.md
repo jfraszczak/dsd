@@ -16,6 +16,7 @@ docker run -it --rm --name fraszczak_segmentation_container --gpus "device=2" --
 
 Dataset is expected to be stored in the following way:
 
+<pre>
 canopy-volume-estimation <br />
 └─── data <br />
 │   └─── segmentation <br />
@@ -27,8 +28,7 @@ canopy-volume-estimation <br />
 |           | 1659006356_57917118.png <br />
 |           | 1659006356_723540306.png <br />
 |           | ... <br />
-
-      
+</pre>   
 
 
 ## Setup of X11 forwarding
