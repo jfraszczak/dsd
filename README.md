@@ -80,7 +80,7 @@ python3 -m src.segmentation.visualization.compare_models
 
 
 # 3D reconstructions processing
-*This module is written in the most shaky way as outputs of different recosntructions have different formats and various configurations were testes such as using reconstructions consisting of only one side. In case of problems please feel free to contact me*
+*This module is written in the most shaky way as outputs of different recosntructions have different formats and various configurations were tested such as using reconstructions consisting of only one side. In case of any problems please feel free to contact me*
 
 **Reconstructions are assumed to be stored in the following way:**
 ```
