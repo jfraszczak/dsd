@@ -2,8 +2,16 @@
 
 
 # Semantic Segmentation
+
+Build a Docker image
 ```
-docker build -t fraszczak/segmentation:latest ./docker/transformers/
+docker build -t fraszczak/segmentation:latest ./docker/huggingface/
+```
+
+Run container
+
+```
+docker run -it --rm --name fraszczak_segmentation_container --gpus "device=2" --cpuset-cpus 8-15 --runtime=nvidia --shm-size=8G --memory=28G --memory-swap=32G --volume /multiverse/datasets/fraszczak/canopy_analysis:/workspace/fraszczak/datasets fraszczak/segmentation:latest
 ```
 
 
