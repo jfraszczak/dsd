@@ -80,6 +80,8 @@ python3 -m src.segmentation.visualization.compare_models
 
 
 # 3D reconstructions processing
+* *This module is written in the most shaky way as outputs of different recosntructions have different formats and various configurations were testes such as using reconstructions
+* consisting of only one side. In case of problems please feel free to contact me* *
 
 **Reconstructions are assumed to be stored in the following way:**
 ```
@@ -133,7 +135,6 @@ python3 -m src.3d_reconstruction.scripts.correct_2021_bags
 
 # Setup of X11 forwarding
 In order to launch GUI applications from the level of Docker container SSH X11 forwarding shall be enabled according to the following steps:
-
 
 ## Local Computer
 * Install Xming X server
