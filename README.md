@@ -14,6 +14,22 @@ Run container
 docker run -it --rm --name fraszczak_segmentation_container --gpus "device=2" --cpuset-cpus 8-15 --runtime=nvidia --shm-size=8G --memory=28G --memory-swap=32G --volume /multiverse/datasets/fraszczak/canopy_analysis:/workspace/fraszczak/datasets fraszczak/segmentation:latest
 ```
 
+Dataset is expected to be stored in the following way:
+
+canopy-volume-estimation 
+└─── data
+│   └─── segmentation
+│       │  raw
+│       └─── annotations
+|       |   | instances_default.json (image annotations in COCO format)
+|       |
+|       └─── images
+|           | 1659006356_57917118.png
+|           | 1659006356_723540306.png
+|           | ...
+
+      
+
 
 ## Setup of X11 forwarding
 In order to launch GUI applications from the level of Docker container SSH X11 forwarding shall be enabled according to the following steps:
