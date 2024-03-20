@@ -2,9 +2,9 @@
 
 
 # Semantic Segmentation
-'''
+```
 docker build -t fraszczak/segmentation:latest ./docker/transformers/
-'''
+```
 
 
 ## Setup of X11 forwarding
