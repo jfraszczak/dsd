@@ -3,7 +3,7 @@
 
 # Semantic Segmentation
 
-## Setup Docker container
+## Set-up of Docker container
 **Build a Docker image**
 ```
 docker build -t fraszczak/segmentation:latest ./docker/huggingface/
