@@ -79,18 +79,68 @@ python3 -m src.segmentation.visualization.compare_models
 
 
 
+# 3D reconstructions processing
+
+**Reconstructions are assumed to be stored in the following way:**
+```
+canopy-volume-estimation
+└─── data
+│   └─── reconstructions
+│       │  2021
+│       └─── row_1
+|           └─── rtabmap_reconstruction
+|                └─── rgbd
+|                    | rtabmap_calib
+|                    | rtabmap_depth
+|                    | ...
+```
+
+**Run point cloud processing pipeline to perform segmentation and estimate volumes**
+```
+python3 -m src.3d_reconstruction.collect_measurements
+```
+
+Following snippet of code from collect_measurements.py demonstrates how processing is performed and which parameters shall be specified
+```
+def collect_measurements_based_on_trunks(path: str, year: int, row: int, reconstruction_type: str, data_source: str) -> None:
+    processor = ReconstructionProcessor(path=path, data_source=data_source, reconstruction_type=reconstruction_type, dir=reconstruction_type + '_reconstruction', one_sided=True)
+    processor.process(one_side=False, read_segmentations=True)
+    trunks_locations = processor.get_trunks_positions()
+    canopy = processor.get_canopy_cloud()
+    processor.get_segmented_cloud()
+
+    volume_estimator = VolumeEstimator()
+    volume_estimator.load_cloud(canopy)
+    volume_estimator._get_function_approximated_volume(start=0, end=10, voxel_size=0.03, increment=0.25)
+    volume_estimator.compute_volumes(measurements_gps=gps_measurements[year], datum=get_datum(row), voxel_size=0.03, trunks_locations=trunks_locations)
+
+path = 'data/3d_reconstruction/reconstructions/2022/row_4'
+collect_measurements_based_on_trunks(path=path, year=2022, row=4, reconstruction_type='rtabmap', data_source='rgbd')
+```
+
+**Transform output directory of ART-SLAM reconstruction into an appropriate format used for further processing**
+```
+python3 -m src.3d_reconstruction.scripts.transform_art_slam
+```
+
+**Set appropriate timestamps for /d435i messages of 2021 bags**
+```
+python3 -m src.3d_reconstruction.scripts.correct_2021_bags
+```
 
 
-## Setup of X11 forwarding
+<br /> <br /> <br />
+
+# Setup of X11 forwarding
 In order to launch GUI applications from the level of Docker container SSH X11 forwarding shall be enabled according to the following steps:
 
 
-### Local Computer
+## Local Computer
 * Install Xming X server
 * Set system variable DISPLAY = localhost:0.0
 * Launch X server (remeber to set a display number to 0 or accordingly to the specified in system variables port)
 
-### Remote Machine
+## Remote Machine
 * In /.ssh/config file include following lines to enable X11 forwarding
 ```
 ForwardAgent yes
