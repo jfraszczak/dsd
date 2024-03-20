@@ -55,7 +55,7 @@ python3 -m src.segmentation.visualization.show_training_dataset hydra.output_sub
 python3 -m src.segmentation.models.train
 ```
 
-**Visualize predictions of validation set**
+**Visualize predictions of validation set (requires to enable X11 forwarding for Docker)**
 ```
 python3 -m src.segmentation.models.predict hydra.output_subdir=null hydra.run.dir=.
 ```
